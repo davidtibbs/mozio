@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "ca288067-2d08-4cc1-922b-47278de267a0",
+		"name": "Mozio API Documentation",
+		"description": "The Mozio API provides a set of endpoints to manage providers and their service areas, including functionalities to determine if a geographical point is within a service area.\n\n**Prompt:**\n\nAs Mozio expands internationally, we have a growing problem that many transportation suppliers we'd like to integrate cannot give us concrete zip codes, cities, etc that they serve.\n\nTo combat this, we'd like to be able to define custom polygons as their \"service area\" and we'd like for the owners of these shuttle companies to be able to define and alter their polygons whenever they want, eliminating the need for Mozio’s employees to do this boring grunt work.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36411364"
+	},
+	"item": [
+		{
+			"name": "1. Providers",
+			"item": [
+				{
+					"name": "/api/providers/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/providers/",
+						"description": "Retrieve a list of all providers."
+					},
+					"response": []
+				},
+				{
+					"name": "/api/providers/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Alexandru Revok",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "alexandru@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "+1231234567",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "English",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "USD",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/providers/",
+						"description": "Create a new provider."
+					},
+					"response": []
+				},
+				{
+					"name": "/api/providers/:id/",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone_number",
+									"value": "+1234567890",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/providers/2/",
+						"description": "Update an existing provider. (with new phone_number)"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/providers/:id/",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/providers/1/",
+						"description": "Delete an existing provider."
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD operations for Provider (name, email, phone number, language and currency)"
+		},
+		{
+			"name": "2. Service Areas",
+			"item": [
+				{
+					"name": "/api/service-areas/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/service-areas/",
+						"description": "Retrieve a list of all service areas."
+					},
+					"response": []
+				},
+				{
+					"name": "/api/service-areas/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "New Service Area",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "250.00",
+									"type": "text"
+								},
+								{
+									"key": "geojson",
+									"value": "{\n        \"type\": \"Polygon\",\n        \"coordinates\": [[[30.0, 20.0], [40.0, 50.0], [20.0, 50.0], [10.0, 30.0], [30.0, 20.0]]]\n}",
+									"type": "text"
+								},
+								{
+									"key": "provider",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/service-areas/",
+						"description": "Create a new service area."
+					},
+					"response": []
+				},
+				{
+					"name": "/api/service-areas/:id/",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "price",
+									"value": "200.00",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/service-areas/4/",
+						"description": "Update an existing service area. (with new price)"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/service-areas/:id/",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/service-areas/3/",
+						"description": "Delete an existing service area."
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD operations for ServiceArea (name, price, geojson and provider)"
+		},
+		{
+			"name": "3. Service Area Contains",
+			"item": [
+				{
+					"name": "/api/service-areas/contains/?lat=&lng=",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/service-areas/contains/?lat=25.00&lng=30.00",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"service-areas",
+								"contains",
+								""
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "25.00"
+								},
+								{
+									"key": "lng",
+									"value": "30.00"
+								}
+							]
+						},
+						"description": "Check which service areas contain a specific point.\n\n- lat: Latitude of the point (float)\n    \n- lng: Longitude of the point (float)"
+					},
+					"response": []
+				}
+			],
+			"description": "Create a specific endpoint that takes a lat/lng pair as arguments and returns a list of all polygons that include the given lat/lng. The name of the polygon, provider's name, and price should be returned for each polygon. This operation should be FAST."
+		}
+	]
+}
